@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* 設計全螢幕顯示的 Screen */
+        .screen {
+            width: 50%;
+            height: 200px;
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white; 
+            color:rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+        }
+
+        /* 自定義按鈕大小 */
+        .btn-custom1 {
+            width: 150px; /* 自定義寬度 */
+            height: 150px;  /* 自定義高度 */
+            font-size: 1.5rem; /* 調整字體大小 */
+        }
+        .btn-custom2 {
+            width: 100px; /* 自定義寬度 */
+            height: 100px;  /* 自定義高度 */
+            font-size: 1.5rem; /* 調整字體大小 */
+        }
+
+        /* 自定義按鈕位置 */
+        .btn-fixed1 {
+            position: absolute;
+            top: 50%;
+            left: 40%;
+            transform: translate(-50%, -50%);
+        }
+        .btn-fixed2 {
+            position: absolute;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+        }
+        .btn-fixed3 {
+            position: absolute;
+            top: 70%;
+            left: 40%;
+            transform: translate(-50%, -50%);
+        }
+        .btn-fixed4 {
+            position: absolute;
+            top: 70%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+        }
+        /* 圖片樣式 */
+        .fixed-image1 {
+            position: absolute;
+            top: 45%; /* 距離上方 50px */
+            left: 60%; /* 距離左側 50px */
+            width: 40%; /* 調整圖片寬度 */
+        }
+        .fixed-image2 {
+            position: absolute;
+            top: 15%; /* 距離上方 50px */
+            left: 5%; /* 距離左側 50px */
+            width: 30%; /* 調整圖片寬度 */
+        }
+
+    </style>
+    <title>Screen 顯示數字</title>
+</head>
+<body>
+    <!-- 新增標題 -->
+    <h1 class="text-center mt-4">資電401-2冷氣控制器</h1>
+     <!-- 插入圖片 -->
+     <img src="https://hips.hearstapps.com/amv-prod-elletw.s3.amazonaws.com/new-dossier/000_283.jpg?crop=1xw:0.7434944237918215xh;center,top&resize=1200:*" alt="範例圖片" class="fixed-image1">
+     <img src="https://p3-sdbk2-media.byteimg.com/tos-cn-i-xv4ileqgde/93a0291020c34eeda09a54fb1ab65f41~tplv-xv4ileqgde-resize-w:750.image" alt="範例圖片" class="fixed-image2">
+    <!-- Screen 顯示數字的區域，初始狀態為空 -->
+    <div class="screen" id="screen">
+        <!-- 這裡將由 JS 動態添加數字 -->
+    </div>
+    <button type="button" class="btn btn-success btn-custom1 btn-fixed1" onclick="turnOn()">ON</button>
+    <button type="button" class="btn btn-danger btn-custom1 btn-fixed2" onclick="turnOff()">OFF</button>
+    <!-- 操作按鈕 -->
+    <button type="button" class="btn btn-primary btn-custom2 btn-fixed3" onclick="increment()">UP</button>
+    <button type="button" class="btn btn-secondary btn-custom2 btn-fixed4" onclick="decrement()">DOWN</button>
+
+    <!-- Bootstrap JS 和 jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.amazonaws.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // 初始化數字
+        let number = 23;
+        // 變量來控制按鈕是否可操作
+        let isOn = false;
+
+        // 按 ON 按鈕時顯示數字 23，並允許 UP 和 DOWN 按鈕操作
+        function turnOn() {
+            isOn = true;
+            document.getElementById('screen').innerHTML = number;
+        }
+
+        // 按 OFF 按鈕時禁止 UP 和 DOWN 按鈕操作，並清空 screen
+        function turnOff() {
+            isOn = false;
+            document.getElementById('screen').innerHTML = ''; // 清空顯示的數字
+        }
+
+        // 按 UP 按鈕時，數字加一（如果允許操作）
+        function increment() {
+            if (isOn) {  // 檢查是否開啟
+                number = Math.min(number + 1, 30);
+                document.getElementById('screen').innerHTML = number;
+            }
+        }
+
+        // 按 DOWN 按鈕時，數字減一（如果允許操作）
+        function decrement() {
+            if (isOn) {  // 檢查是否開啟
+                number = Math.max(number - 1, 16);
+                document.getElementById('screen').innerHTML = number;
+            }
+        }
+    </script>
+</body>
+</html>
